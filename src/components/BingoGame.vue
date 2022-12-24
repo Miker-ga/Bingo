@@ -1,42 +1,49 @@
 <template>
-  <div id="main-game" class="tile is-ancestor">
-    <div id="numbers-column" class="tile is-8">
-      <ul class="numbers-container">
-        <li v-for="n in numbers" :id="[n.number]" :key="n.number">
-          <transition name="picked-number">
-            <div v-if="n.isPicked" :class="['bingo-number', { picked: n.isPicked }]">
+  <div id="main-game">
+    <div class="columns">
+      <div class="column is-1">
+        <ul class="letters-container">
+          <li v-for="n in ['B', 'I', 'N', 'G', 'O']" :id="[n]" :key="n">
+            <div class="letter-number title">
+              {{ n }}
+            </div>
+          </li>
+        </ul>
+      </div>
+      <div class="column is-9">
+        <ul class="numbers-container">
+          <li v-for="n in numbers" :id="[n.number]" :key="n.number">
+            <transition name="picked-number">
+              <div v-if="n.isPicked" :class="['bingo-number', { picked: n.isPicked }]">
+                {{ n.number }}
+              </div>
+            </transition>
+            <div v-if="!n.isPicked" class="bingo-number">
               {{ n.number }}
             </div>
-          </transition>
-          <div v-if="!n.isPicked" class="bingo-number">
-            {{ n.number }}
-          </div>
-        </li>
-      </ul>
-    </div>
-    <div id="draw-column" class="tile is-4 is-vertical is-parent">
-      <div class="tile is-child">
-        <last-three-numbers :numbers="lastThree" />
+          </li>
+        </ul>
+      </div>
+      <div class="column is-2 is-centered">
         <div class="bingo-roulette">
           <p :class="[{ 'reveal-number reveal-number-animation': animateTagetNum }, 'number-draw']">
             {{ targetNum }}
           </p>
         </div>
-      </div>
-      <div id="controls" class="tile is-child">
-        <div>
-          <b-tooltip label="Click para obtener un nuevo número" position="is-bottom" type="is-light" size="is-small"
-            delay="1000">
-            <b-button type="is-primary new-number" size="is-medium" :disabled="drawingInProcess" rounded outlined
-              icon-left="reload" @click="spin" @keyup.enter="spin">
-              Nuevo número!
-            </b-button>
-          </b-tooltip>
-          <b-button type="is-text" rounded @click="reset">
-            Reiniciar
+        <b-tooltip label="Click para obtener un nuevo número" position="is-bottom" type="is-light" size="is-small"
+          delay="1000">
+          <b-button type="is-primary new-number" size="is-medium" :disabled="drawingInProcess" rounded outlined
+            icon-left="reload" @click="spin" @keyup.enter="spin">
+            Nuevo número!
           </b-button>
-        </div>
+        </b-tooltip>
+        <b-button type="is-text" rounded @click="reset">
+          Reiniciar
+        </b-button>
       </div>
+    </div>
+    <div class="columns">
+      <last-three-numbers :numbers="lastThree" />
     </div>
   </div>
 </template>
@@ -209,8 +216,27 @@ ul {
 
 .numbers-container>li {
   font-size: 20pt;
-  width: 10%;
+  width: 6.6%;
   padding: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.letters-container {
+  margin: 0 auto;
+  border-radius: 30px;
+  padding: 0px;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.letters-container>li {
+  font-size: 20pt;
+  width: 100%;
+  padding: 0px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -223,6 +249,15 @@ ul {
   border-radius: 30px;
   padding-top: 2px;
   border: 1px solid rgba($border, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.bingo-letter {
+  font-size: 20pt;
+  width: 50px;
+  height: 50px;
   display: flex;
   align-items: center;
   justify-content: center;

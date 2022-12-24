@@ -1,12 +1,11 @@
 <template>
-  <div id="component" class="container">
-    <div class="container has-text-centered">
-      <h1 class="title is-2">
+  <div class="container columns is-vcentered">
+    <div class="column is-3 has-text-centered is-vcentered">
+      <h1 class="title">
         Números cantados:
       </h1>
-      <hr>
     </div>
-    <div class="container">
+    <div class="column is-9">
       <transition-group name="list" tag="ul" class="numbers-container">
         <li v-for="n in numbers" :key="n" class="bingo-number">
           {{ n }}
@@ -32,12 +31,14 @@ export default {
 $border: #0000;
 $primary: #750303;
 
-.title{
+.title {
   color: $primary !important;
 }
 
-#component {
-  height: 200px;
+.columns.is-vcentered {
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
 }
 
 .numbers-container {
@@ -56,7 +57,7 @@ $primary: #750303;
   height: 70px;
   border-radius: 50px;
   margin: 5px;
-  padding-top: 5px;   
+  padding-top: 5px;
   border: 1px solid rgba($border, 0.5);
   display: flex;
   flex-shrink: 0;
