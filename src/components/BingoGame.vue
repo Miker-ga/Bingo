@@ -60,7 +60,7 @@ export default {
       target: null,
       targetNum: null,
       animateTagetNum: false,
-      maxNumber: 75,
+      maxNumber: 90,
       numbers: [],
       pickedNumbers: []
     };
